@@ -7,8 +7,8 @@
 //               year range, and sort controls.
 // -----------------------------------------------
 
-import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import ItemCard from '../components/ItemCard'
 import Message from '../components/Message'
 import { ItemsContext } from '../context/ItemsContext'
@@ -28,13 +28,23 @@ export default function ListView() {
   } = useContext(ItemsContext)
 
   const navigate = useNavigate()
+  const location = useLocation()
+  const [showSaved, setShowSaved] = useState(false)
+
+  useEffect(() => {
+    if (location.state?.saved) {
+      setShowSaved(true)
+      const timer = setTimeout(() => setShowSaved(false), 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [location.state])
 
   return (
     <div>
-      <div className="row g-2 align-items-end mb-3">
-        {/* Success feedback */}
-        {showSaved && <Message type="success" text="Album saved successfully!" />}
+      {/* Success feedback */}
+      {showSaved && <Message type="success" text="Album saved successfully!" />}
 
+      <div className="row g-2 align-items-end mb-3">
         {/* Search */}
         <div className="col-md-3">
           <label className="form-label mb-1">Search</label>
