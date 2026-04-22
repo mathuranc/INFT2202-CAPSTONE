@@ -10,6 +10,7 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ItemCard from '../components/ItemCard'
+import Message from '../components/Message'
 import { ItemsContext } from '../context/ItemsContext'
 
 export default function ListView() {
@@ -31,6 +32,8 @@ export default function ListView() {
   return (
     <div>
       <div className="row g-2 align-items-end mb-3">
+        {/* Success feedback */}
+        {showSaved && <Message type="success" text="Album saved successfully!" />}
 
         {/* Search */}
         <div className="col-md-3">

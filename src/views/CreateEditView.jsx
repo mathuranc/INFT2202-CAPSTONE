@@ -23,12 +23,13 @@ export default function CreateEditView() {
   function onSave(data) {
     if (id) { updateItem(id, data) }
     else { addItem(data) }
-    navigate('/list')
+    navigate('/list', { state: { saved: true } })
   }
 
   return (
     <div>
       <h2 className="h5 mb-3">{id ? 'Edit Album' : 'Add Album'}</h2>
+      {error && <Message type="danger" text="Something went wrong. Please try again." />}
       <ItemForm
         initial={initial}
         categories={categories}
