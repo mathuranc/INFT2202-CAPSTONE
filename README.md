@@ -1,4 +1,4 @@
-# 🎵 Album Collection — INFT 2202 Capstone SPA
+# 🎵 Album Collection 🎵 — INFT 2202 Capstone SPA
 
 A multi-view React single-page application for managing a personal album collection. Built as the capstone project for INFT 2202 Web Development.
 
