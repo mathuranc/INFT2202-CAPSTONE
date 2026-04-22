@@ -7,7 +7,8 @@
 //                on whether an id param is present.
 // -----------------------------------------------
 
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import Message from '../components/Message'
 import { useNavigate, useParams } from 'react-router-dom'
 import ItemForm from '../components/ItemForm'
 import { ItemsContext } from '../context/ItemsContext'
@@ -16,15 +17,20 @@ export default function CreateEditView() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { items, addItem, updateItem, categories } = useContext(ItemsContext)
+  const [error, setError] = useState(false)
 
   // Initial if editing; onSave add/update then navigate
   const initial = id ? items.find(i => i.id === id) : null
 
   function onSave(data) {
+  try {
     if (id) { updateItem(id, data) }
     else { addItem(data) }
     navigate('/list', { state: { saved: true } })
+  } catch {
+    setError(true)
   }
+}
 
   return (
     <div>
